@@ -1,8 +1,7 @@
-package com.storyboard.graphx.ui;
+package com.storyboard.graphx.ui.editor;
 
 import com.storyboard.graphx.node.DialogueNode;
-import com.storyboard.graphx.Editor;
-import com.storyboard.graphx.Editor.Camera;
+import com.storyboard.graphx.ui.editor.Editor.Camera;
 import com.storyboard.utils.Vector2;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,14 +15,16 @@ import java.io.IOException;
 public class EditorUI extends StackPane {
 
     @FXML private Pane inspectorWindow;
+    @FXML private Pane projectPropertyPane;
     @FXML private Pane editorPane;
 
     private final Inspector inspector;
+    private final ProjectPropertyWindow projectWindow;
     private final Editor editor;
     private final QuickToolBar quickToolBar;
 
     public EditorUI(){
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/storyboard/graphx/ui/EditorUI.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/storyboard/graphx/ui/editor/EditorUI.fxml"));
 
         loader.setRoot(this);
         loader.setController(this);
@@ -37,12 +38,14 @@ public class EditorUI extends StackPane {
         editor = new Editor();
         inspector = new Inspector();
         quickToolBar = new QuickToolBar();
+        projectWindow = new ProjectPropertyWindow();
 
         setInspector(inspector);
         setQuickToolBar(quickToolBar);
 
         editorPane.getChildren().addAll(editor);
         inspectorWindow.getChildren().addAll(inspector);
+        projectPropertyPane.getChildren().addAll(projectWindow);
 
         editorPane.addEventFilter(MouseEvent.MOUSE_PRESSED, e -> {
             if(e.getButton() == MouseButton.SECONDARY){
