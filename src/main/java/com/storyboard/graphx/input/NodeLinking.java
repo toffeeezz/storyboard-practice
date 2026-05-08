@@ -3,6 +3,7 @@ package com.storyboard.graphx.input;
 import com.storyboard.graphx.node.comp.ArrowLine;
 import com.storyboard.graphx.node.StoryNode;
 import com.storyboard.graphx.node.Port;
+import com.storyboard.graphx.node.comp.DialogueEntry;
 import javafx.scene.input.MouseDragEvent;
 import javafx.scene.input.MouseEvent;
 
@@ -17,6 +18,7 @@ public class NodeLinking implements Command{
     private boolean isLinking = false;
 
     private ArrowLine arrowLine;
+    private final DialogueEntry dialogueEntry;
 
 
     public NodeLinking(Port startPort, Port currentEndPort, StoryNode parentNode) {
@@ -24,6 +26,7 @@ public class NodeLinking implements Command{
         this.currentEndPort = currentEndPort;
 
         this.parentNode = parentNode;
+        dialogueEntry = startPort.getEntry();
 
     }
 
@@ -57,13 +60,13 @@ public class NodeLinking implements Command{
         if(!startPort.getStyleClass().contains("active"))
             startPort.getStyleClass().add("active");
 
-        if(startPort.getEntry() != null && startPort.getEntry().getArrowLine() != null) {
+        if(dialogueEntry != null && startPort.getEntry().getArrowLine() != null) {
             parentNode.getEditor().removeArrow(startPort.getEntry().getArrowLine());
-            startPort.getEntry().setArrowLine(null);
-            startPort.getEntry().getConnectedPort().linkedPropertyProperty().set(false);
-            startPort.getEntry().getConnectedPort().getStyleClass().remove("hover");
-            startPort.getEntry().setConnectedPort(null);
-            startPort.getEntry().setNextEntry(null);
+            dialogueEntry.setArrowLine(null);
+            dialogueEntry.getConnectedPort().linkedPropertyProperty().set(false);
+            dialogueEntry.getConnectedPort().getStyleClass().remove("hover");
+            dialogueEntry.setConnectedPort(null);
+            dialogueEntry.setNextEntry(null);
         }
 
         arrowLine = new ArrowLine(20, startPort.getCenterPos(), parentNode.getEditor().getCamera().getMousePixelPos(e));
@@ -108,11 +111,11 @@ public class NodeLinking implements Command{
             return;
         }
 
-        System.out.println(isLinking);
+
         arrowLine.bindEndpoint(endPort.getCenterPos());
         endPort.linkedPropertyProperty().set(true);
-        startPort.getEntry().setNextEntry(endPort.getEntry());
-        startPort.getEntry().setArrowLine(arrowLine);
-        startPort.getEntry().setConnectedPort(endPort);
+        dialogueEntry.setNextEntry(endPort.getEntry());
+        dialogueEntry.setArrowLine(arrowLine);
+        dialogueEntry.setConnectedPort(endPort);
     }
 }
