@@ -1,6 +1,6 @@
 package com.storyboard.graphx.node;
 
-import com.storyboard.graphx.Editor;
+import com.storyboard.graphx.ui.editor.Editor;
 import com.storyboard.graphx.input.NodeDragging;
 import com.storyboard.utils.Vector2;
 import javafx.scene.input.KeyCode;

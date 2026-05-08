@@ -1,4 +1,4 @@
-package com.storyboard.graphx;
+package com.storyboard.graphx.ui.editor;
 
 import com.storyboard.constants.Settings;
 import com.storyboard.graphx.input.CommandHandler;

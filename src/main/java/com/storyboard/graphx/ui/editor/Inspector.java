@@ -1,4 +1,4 @@
-package com.storyboard.graphx.ui;
+package com.storyboard.graphx.ui.editor;
 
 import com.storyboard.graphx.node.StoryNode;
 import javafx.fxml.FXML;
@@ -17,7 +17,7 @@ public class Inspector extends VBox {
     private Consumer<StoryNode> onParentLabelPressed;
 
     protected Inspector(){
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/storyboard/graphx/ui/Inspector.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/storyboard/graphx/ui/editor/Inspector.fxml"));
 
         loader.setRoot(this);
         loader.setController(this);

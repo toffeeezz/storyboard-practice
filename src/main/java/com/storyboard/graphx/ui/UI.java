@@ -1,4 +1,5 @@
 package com.storyboard.graphx.ui;
+import com.storyboard.graphx.ui.editor.EditorUI;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.StackPane;
 
@@ -12,7 +13,7 @@ public class UI extends StackPane {
 
 
     public UI(){
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/storyboard/graphx/UI.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/storyboard/graphx/ui/UI.fxml"));
 
         loader.setRoot(this);
         loader.setController(this);

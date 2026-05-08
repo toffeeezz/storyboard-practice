@@ -1,7 +1,7 @@
 package com.storyboard.graphx.node;
 
 import com.storyboard.graphx.node.comp.DialogueEntry;
-import com.storyboard.graphx.Editor;
+import com.storyboard.graphx.ui.editor.Editor;
 import com.storyboard.graphx.node.comp.Dialogue;
 import com.storyboard.utils.Vector2;
 import javafx.fxml.FXML;
@@ -42,7 +42,7 @@ public class DialogueNode extends StoryNode {
     }
 
     private void setDefault() {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/storyboard/graphx/DialogueNode.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/storyboard/graphx/node/DialogueNode.fxml"));
         loader.setRoot(this);
         loader.setController(this);
 
