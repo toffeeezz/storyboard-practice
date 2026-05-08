@@ -180,14 +180,16 @@
 
 .editor{
     -fx-background-color: -fx-canvas;
-    -fx-border-width: 5;
-    -fx-border-color: #16121f;
 }
 
 
 .inspector{
     -fx-background-color: #16121f;
     -fx-text-fill: #a090cc;
+}
+
+.font-icon{
+    -fx-fill: -fx-port-active-fill;
 }
 
 .inspector .header{
