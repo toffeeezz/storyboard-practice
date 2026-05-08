@@ -1,4 +1,4 @@
-package com.storyboard.graphx.ui;
+package com.storyboard.graphx.ui.editor;
 
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -14,7 +14,7 @@ public class QuickToolBar extends VBox {
     @FXML private Button addDialogueButton;
 
     public QuickToolBar(){
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/storyboard/graphx/ui/QuickToolBar.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/storyboard/graphx/ui/editor/QuickToolBar.fxml"));
 
         loader.setRoot(this);
         loader.setController(this);
