@@ -3,7 +3,7 @@ package com.storyboard.graphx.ui.editor;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Cursor;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import org.kordamp.ikonli.javafx.FontIcon;
@@ -13,7 +13,7 @@ import java.io.IOException;
 public class ProjectPropertyWindow extends VBox {
 
     @FXML private FontIcon addVarButton;
-    @FXML private AnchorPane emptyVarPane;
+    @FXML private Label emptyVarLabel;
 
     @FXML private VBox varPane;
 
@@ -40,6 +40,7 @@ public class ProjectPropertyWindow extends VBox {
 
 
     private void addGlobalVar(){
-        stackRoot.getChildren().remove(emptyVarPane);
+        varPane.getChildren().remove(emptyVarLabel);
+        varPane.getChildren().add(varPane.getChildren().size() - 1, new GlobalVarEntry());
     }
 }
