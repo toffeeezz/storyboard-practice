@@ -1,68 +1,65 @@
 @font-face {
     /* Give it a nickname you'll remember */
     font-family: 'Outfit';
-
-    /* Use the relative path to the font file */
     src: url('../fonts/Outfit/static/Outfit-SemiBold.ttf');
 }
 
 @font-face {
     /* Give it a nickname you'll remember */
     font-family: 'IBM Plex Mono';
-
-    /* Use the relative path to the font file */
     src: url('../fonts/IBM_Plex_Mono/IBMPlexMono-Light.ttf');
 }
 
-.root{
-   /* Backgrounds */
-   -fx-canvas: #0f0d17;
-   -fx-panel: #16121f;
-   -fx-input: #1e1830;
-   -fx-section: #261e3d;
-   -fx-deep-bg: #1a1030;
+.root {
+    /* Backgrounds */
+    -fx-canvas: #0f0d17;
+    -fx-panel: #16121f;
+    -fx-input: #1e1830;
+    -fx-section: #261e3d;
+    -fx-deep-bg: #1a1030;
 
-   /* Node Surfaces */
-   -fx-node-bg: #2e2450;
-   -fx-topbar: #3b2f6b;
-   -fx-tag-bg: #4a3a82;
-   -fx-border: #5c4a99;
+    /* Node Surfaces */
+    -fx-node-bg: #2e2450;
+    -fx-topbar: #3b2f6b;
+    -fx-tag-bg: #4a3a82;
+    -fx-border: #5c4a99;
 
-   /* Accents & Text */
-   -fx-text-muted: #7b5ea7;
-   -fx-text-secondary: #9d78d0;
-   -fx-text-accent: #c4a0f5;
-   -fx-text-primary: #e8d8ff;
+    /* Accents & Text */
+    -fx-text-muted: #7b5ea7;
+    -fx-text-secondary: #9d78d0;
+    -fx-text-accent: #c4a0f5;
+    -fx-text-primary: #e8d8ff;
 
-   /* Connection Points */
-   -fx-port-default-fill: #1a1030;
-   -fx-port-default-stroke: #7b5ea7;
-   -fx-port-hover-fill: #1a1030;
-   -fx-port-hover-stroke: #c4a0f5;
-   -fx-port-active-fill: #c4a0f5;
-   -fx-port-active-stroke: #e8d8ff;
-   -fx-port-connected-fill: #7b2fa0;
-   -fx-port-connected-stroke: #c084f5;
+    /* Connection Points */
+    -fx-port-default-fill: #1a1030;
+    -fx-port-default-stroke: #7b5ea7;
+    -fx-port-hover-fill: #1a1030;
+    -fx-port-hover-stroke: #c4a0f5;
+    -fx-port-active-fill: #c4a0f5;
+    -fx-port-active-stroke: #e8d8ff;
+    -fx-port-connected-fill: #7b2fa0;
+    -fx-port-connected-stroke: #c084f5;
 
-   /* Edges */
-   -fx-edge-default: #5c4a99;
-   -fx-edge-hover: #9d78d0;
-   -fx-edge-selected: #c4a0f5;
+    /* Edges */
+    -fx-edge-default: #5c4a99;
+    -fx-edge-hover: #9d78d0;
+    -fx-edge-selected: #c4a0f5;
 
-   /* New Purple Variants */
-   -fx-vivid-purple: #7b2fa0;
-   -fx-bright-purple: #c084f5;
-   -fx-mid-violet: #a855f7;
-   -fx-deep-violet: #6d28d9;
-   -fx-pink-lilac: #f0abfc;
+    /* Purple Variants */
+    -fx-vivid-purple: #7b2fa0;
+    -fx-bright-purple: #c084f5;
+    -fx-mid-violet: #a855f7;
+    -fx-deep-violet: #6d28d9;
+    -fx-pink-lilac: #f0abfc;
 
-   /* Semantic */
-   -fx-success: #2d4a3e;
-   -fx-info: #3d5a80;
-   -fx-danger: #6b2d2d;
-   -fx-warning: #5a4a1e;
+    /* Semantic */
+    -fx-success: #2d4a3e;
+    -fx-info: #3d5a80;
+    -fx-danger: #6b2d2d;
+    -fx-warning: #5a4a1e;
 }
 
+/* ── Node focus ring ── */
 .node.focused {
     -fx-border-color: -fx-edge-selected;
     -fx-border-width: 2;
@@ -70,49 +67,47 @@
     -fx-background-radius: 7;
 }
 
+/* ── Graph edge arrows ── */
 .arrow {
     -fx-stroke: -fx-port-active-fill;
     -fx-fill: -fx-port-active-fill;
 }
 
+/* ── Ports ── */
+.port.start {
+    -fx-fill: -fx-node-bg;
+    -fx-stroke: -fx-port-default-stroke;
+    -fx-stroke-width: 2;
+}
 .port.start.hover {
     -fx-fill: -fx-port-hover-fill;
     -fx-stroke: -fx-port-hover-stroke;
 }
-
 .port.start.active {
     -fx-fill: -fx-port-active-fill;
     -fx-stroke: -fx-port-active-stroke;
 }
 
-.port.start{
-    -fx-fill: -fx-node-bg;
+.port.end {
+    -fx-fill: -fx-port-default-fill;
     -fx-stroke: -fx-port-default-stroke;
+    -fx-stroke-dash-array: 1 5 1 5 1 5;
     -fx-stroke-width: 2;
 }
-
-.port.end.hover{
+.port.end.hover {
     -fx-fill: -fx-port-hover-fill;
     -fx-stroke: -fx-port-hover-stroke;
     -fx-stroke-dash-array: 1 5 1 5 1 5;
     -fx-stroke-width: 2;
 }
-
-.port.end.active{
+.port.end.active {
     -fx-fill: -fx-port-active-fill;
     -fx-stroke: -fx-port-active-stroke;
     -fx-stroke-dash-array: 1 5 1 5 1 5;
     -fx-stroke-width: 2;
 }
 
-
-.port.end{
-    -fx-fill: -fx-port-default-fill;
-    -fx-stroke: -fx-port-default-stroke;
-    -fx-stroke-dash-array: 1 5 1 5 1 5;
-    -fx-stroke-width: 2;
-}
-
+/* ── Dialogue card node ── */
 .dialogue-card {
     -fx-background-color: -fx-node-bg;
     -fx-border-color: -fx-border;
@@ -120,12 +115,10 @@
     -fx-border-radius: 7;
     -fx-background-radius: 7;
 }
-
 .dialogue-card .topBar {
     -fx-background-color: -fx-topbar;
     -fx-background-radius: 7 7 0 0;
 }
-
 .dialogue-card .tag {
     -fx-background-color: -fx-tag-bg;
     -fx-background-radius: 7;
@@ -133,38 +126,43 @@
     -fx-font-family: 'IBM Plex Mono';
     -fx-font-size: 10px;
 }
-
 .dialogue-card .title {
     -fx-text-fill: white;
     -fx-background-color: transparent;
-    -fx-font-family: 'Outfit SemiBold';
+    -fx-font-family: 'Outfit Semibold';
     -fx-text-overrun: leading-ellipsis;
     -fx-font-size: 15px;
 }
 
-.entry{
+/* ── Entry node ── */
+.entry {
     -fx-background-color: #2e2450;
 }
 
-.entry .input-area{
+/* ── Shared input surface ── */
+.input-area {
     -fx-background-color: -fx-input;
     -fx-background-radius: 7;
 }
 
-.entry .label{
+/* ── Shared label ── */
+.label {
     -fx-text-fill: -fx-text-secondary;
-    -fx-font-family: 'Outfit SemiBold';
+    -fx-font-family: 'Outfit Semibold';
     -fx-font-size: 15px;
 }
 
-.entry .text-field{
+/* ── Shared text field ── */
+.text-field {
     -fx-background-color: transparent;
+    -fx-prompt-text-fill: -fx-text-muted;
     -fx-text-fill: -fx-text-accent;
     -fx-font-family: 'Outfit Semibold';
     -fx-font-size: 15px;
 }
 
-.entry .text-area{
+/* ── Shared text area ── */
+.text-area {
     -fx-text-fill: -fx-text-accent;
     -fx-prompt-text-fill: -fx-text-muted;
     -fx-font-size: 15px;
@@ -172,39 +170,122 @@
     -fx-text-box-border: -fx-input;
     -fx-background-color: -fx-input;
 }
-
-.entry .text-area .content{
+.text-area .content {
     -fx-background-color: -fx-input;
     -fx-border-color: -fx-input;
 }
 
-.editor{
+/* ── Combo box — closed state ── */
+.combo-box {
+    -fx-background-color: -fx-input;
+    -fx-border-color: -fx-border;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+}
+
+/* Selected value display */
+.combo-box .list-cell {
+    -fx-background-color: transparent;
+    -fx-text-fill: -fx-text-accent;
+    -fx-font-family: 'Outfit Semibold';
+    -fx-font-size: 13px;
+}
+
+/* Dropdown arrow button */
+.combo-box .arrow-button {
+    -fx-background-color: transparent;
+}
+
+/* Dropdown arrow icon */
+.combo-box .arrow {
+    -fx-background-color: -fx-text-secondary;
+}
+
+/* ── Combo box — dropdown popup ── */
+.combo-box-popup .list-view {
+    -fx-background-color: -fx-input;
+    -fx-border-color: -fx-border;
+    -fx-border-radius: 5;
+    -fx-effect: dropshadow(gaussian, #0f0d17, 10, 0.3, 0, 4);
+}
+
+/* Dropdown items */
+.combo-box-popup .list-cell {
+    -fx-background-color: transparent;
+    -fx-text-fill: -fx-text-primary;
+    -fx-font-family: 'Outfit Semibold';
+    -fx-font-size: 13px;
+    -fx-padding: 6 10 6 10;
+}
+.combo-box-popup .list-cell:hover {
+    -fx-background-color: -fx-node-bg;
+}
+.combo-box-popup .list-cell:selected {
+    -fx-background-color: -fx-topbar;
+    -fx-text-fill: -fx-text-primary;
+}
+
+/* ── Canvas / editor pane ── */
+.editor {
     -fx-background-color: -fx-canvas;
 }
 
-
-.inspector{
+/* ── Inspector panel ── */
+.inspector {
     -fx-background-color: #16121f;
     -fx-text-fill: #a090cc;
 }
+.inspector .header {
+    -fx-background-color: #1e1830;
+    -fx-text-fill: #e8d8ff;
+    -fx-font-family: 'Outfit Semibold';
+    -fx-font-size: 14px;
+}
 
-.font-icon{
+/* ── Font icons ── */
+.font-icon {
     -fx-fill: -fx-port-active-fill;
 }
 
-.inspector .header{
-    -fx-background-color: #1e1830;
-    -fx-text-fill: #e8d8ff;
-    -fx-font-family: 'Outfit SemiBold';
-    -fx-font-size: 14;
-}
-
+/* ── Quick toolbar ── */
 .quickToolBar {
     -fx-background-color: #16121f;
 }
-
-.quickToolBar .button{
+.quickToolBar .button {
     -fx-background-color: #16121f;
     -fx-text-fill: #c4a0f5;
     -fx-border-color: #c4a0f5;
+}
+
+/* ── Spinner ── */
+.spinner {
+    -fx-background-color: -fx-input;
+    -fx-border-color: -fx-border;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+}
+
+/* The number text field inside */
+.spinner .text-field {
+    -fx-background-color: transparent;
+    -fx-text-fill: -fx-text-accent;
+    -fx-font-family: 'Outfit';
+    -fx-font-size: 13px;
+}
+
+/* Up/down arrow buttons */
+.spinner .increment-arrow-button,
+.spinner .decrement-arrow-button {
+    -fx-background-color: -fx-node-bg;
+}
+
+.spinner .increment-arrow-button:hover,
+.spinner .decrement-arrow-button:hover {
+    -fx-background-color: -fx-topbar;
+}
+
+/* The arrow icons inside the buttons */
+.spinner .increment-arrow-button .increment-arrow,
+.spinner .decrement-arrow-button .decrement-arrow {
+    -fx-background-color: -fx-text-secondary;
 }
