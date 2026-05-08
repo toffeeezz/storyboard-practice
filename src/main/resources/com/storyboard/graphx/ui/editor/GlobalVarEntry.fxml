@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+
+
+<fx:root prefWidth="400.0" styleClass="inspector" stylesheets="@../../../../../css/style.css" type="StackPane" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <HBox StackPane.alignment="TOP_CENTER">
+         <children>
+            <AnchorPane prefHeight="30.0" prefWidth="138.0">
+               <children>
+                  <TextField fx:id="varName" prefHeight="29.0" prefWidth="150.0" promptText="variable name..." styleClass="title" AnchorPane.topAnchor="0.0" />
+               </children>
+            </AnchorPane>
+            <ComboBox fx:id="varBox" prefWidth="150.0" promptText="var type" />
+            <HBox fx:id="varField" alignment="CENTER" prefWidth="172.0" />
+         </children>
+      </HBox>
+   </children>
+</fx:root>
