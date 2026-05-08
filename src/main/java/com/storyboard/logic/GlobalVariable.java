@@ -1,4 +1,4 @@
-package com.storyboard.graphx.ui.editor;
+package com.storyboard.logic;
 
 public class GlobalVariable {
 
@@ -6,20 +6,27 @@ public class GlobalVariable {
         STRING, INT, BOOLEAN, DOUBLE
     }
 
-    private final Type type;
+    private Type type;
     private String name;
     private Object value;
 
-    public GlobalVariable(Type type, Object object){
-        this.type = type;
-        set(object);
+    public GlobalVariable(String name){
+        this.name = name;
     }
 
     public Object get(){
         return value;
     }
 
-    public void set(Object value){
+    public void setType(Type type){
+        this.type = type;
+    }
+
+    public void setName(String name){
+        this.name = name;
+    }
+
+    public void setValue(Object value){
         switch (type){
             case STRING -> { if (!(value instanceof String)) throw new IllegalArgumentException("Expected String");}
             case INT -> { if (!(value instanceof Integer)) throw new IllegalArgumentException("Expected Integer");}
