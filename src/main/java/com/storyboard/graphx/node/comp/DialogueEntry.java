@@ -61,6 +61,12 @@ public class DialogueEntry extends VBox {
 
     private DialogueEntry nextEntry;
 
+    public List<DialogueEntry> getPreviousEntries() {
+        return previousEntries;
+    }
+
+    private final List<DialogueEntry> previousEntries;
+
     public ArrowLine getArrowLine() {
         return arrowLine;
     }
@@ -90,6 +96,7 @@ public class DialogueEntry extends VBox {
         dialogue = dialogueField.getText();
         character = characterField.getText();
         this.dialogueNode = dialogueNode;
+        previousEntries = new ArrayList<>();
         startPort.setStoryNode(this.dialogueNode);
         endPort.setStoryNode(this.dialogueNode);
         startPort.setEntry(this);
@@ -121,7 +128,11 @@ public class DialogueEntry extends VBox {
         startPort.setOnDragDetected(_ -> startPort.startFullDrag());
         startPort.setOnMouseDragged(dialogueNode.getEditor().getCommandHandler()::drag);
         startPort.setOnMousePressed(dialogueNode.getEditor().getCommandHandler()::press);
-        startPort.setOnMouseExited(dialogueNode.getEditor().getCommandHandler()::exit);
+        startPort.setOnMouseExited(e -> {
+            dialogueNode.getEditor().getCommandHandler().exit(e);
+            if(!startPort.getStyleClass().contains("active"))
+                dialogueNode.getEditor().getCommandHandler().end();
+        });
         startPort.setOnMouseReleased(e -> dialogueNode.getEditor().getCommandHandler().release(e));
 
     }
