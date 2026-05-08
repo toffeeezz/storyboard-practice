@@ -23,7 +23,6 @@ import java.util.List;
 /**
  * A story node that holds a sequence of dialogue entries.
  * Each entry contains a character name and their dialogue text.
- *
  * The node's visual layout is defined in DialogueNode.fxml.
  * Its ID is kept in sync with the nameField so it can be referenced
  * by name during export and linking.
