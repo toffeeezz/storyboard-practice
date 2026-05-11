@@ -1,8 +1,11 @@
 package com.storyboard.graphx.ui.editor;
 
+import javafx.application.Platform;
+import javafx.collections.ListChangeListener;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Cursor;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -34,13 +37,33 @@ public class ProjectPropertyWindow extends VBox {
 
         addVarButton.setCursor(Cursor.HAND);
         addVarButton.setOnMousePressed(_ -> addGlobalVar());
+
+        varPane.getChildren().addListener((ListChangeListener<Node>) change -> {
+            while (change.next()) {
+                if (change.wasAdded()) {
+                    Platform.runLater(() -> {
+                        if(!varPane.getChildren().contains(emptyVarLabel) && varPane.getChildren().size() == 1){
+                            varPane.getChildren().addFirst(emptyVarLabel);
+                        }
+                    });
+                }
+                if (change.wasRemoved()) {
+                    Platform.runLater(() -> {
+                        if (varPane.getChildren().size() == 1)
+                            varPane.getChildren().addFirst(emptyVarLabel);
+                    });
+                }
+            }
+        });
+
+        setOnMousePressed(_ -> requestFocus());
     }
 
 
+    private void addGlobalVar() {
 
 
-    private void addGlobalVar(){
         varPane.getChildren().remove(emptyVarLabel);
-        varPane.getChildren().add(varPane.getChildren().size() - 1, new GlobalVarEntry());
+        varPane.getChildren().add(varPane.getChildren().size() - 1, new GlobalVarEntry(varPane));
     }
 }
