@@ -10,6 +10,7 @@ import com.storyboard.utils.Vector2;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.geometry.Point2D;
+import javafx.scene.Node;
 import javafx.scene.input.*;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -51,7 +52,7 @@ public class Editor extends Pane {
     private final CommandHandler commandHandler;
 
     private final List<StoryNode> dialogueNodes = new ArrayList<>();
-    private final ObjectProperty<StoryNode> selectedNode = new SimpleObjectProperty<>();
+    private final ObjectProperty<Node> selectedNode = new SimpleObjectProperty<>();
     private final ObjectProperty<ArrowLine> selectedArrow = new SimpleObjectProperty<>();
 
     public final Camera camera;
@@ -61,12 +62,9 @@ public class Editor extends Pane {
     public CommandHandler getCommandHandler()                { return commandHandler; }
     public Camera getCamera()                                { return camera; }
     public List<StoryNode> getNodes()                        { return dialogueNodes; }
-    public ObjectProperty<StoryNode> selectedNodeProperty()  { return selectedNode; }
-    public ObjectProperty<ArrowLine> selectedArrowProperty() { return selectedArrow; }
-    public StoryNode getSelectedNode()                       { return selectedNode.get(); }
-    public ArrowLine getSelectedArrow(ArrowLine arrow)       { return selectedArrow.get(); }
-    public void setSelectedNode(StoryNode node)              { selectedNode.set(node); }
-    public void setSelectedArrow(ArrowLine arrow)            { selectedArrow.set(arrow); }
+    public ObjectProperty<Node> selectedNodeProperty()  { return selectedNode; }
+    public Node getSelectedNode()                       { return selectedNode.get(); }
+    public void setSelectedNode(Node node)              { selectedNode.set(node); }
 
     public Editor() {
         setPrefSize(Settings.windowWidth, Settings.windowHeight);
@@ -84,7 +82,10 @@ public class Editor extends Pane {
         worldPane.getChildren().add(circle);
 
         // Deselect the active node when the editor canvas itself gains focus
-        focusedProperty().addListener(_ -> selectedNode.set(null));
+        focusedProperty().addListener((_, _, isFocused) -> {
+            if (isFocused)
+                selectedNode.set(null);
+        });
 
         DialogueNode card  = new DialogueNode(this);
         DialogueNode card2 = new DialogueNode(this);
@@ -105,12 +106,13 @@ public class Editor extends Pane {
     private void onMousePressed(MouseEvent event) {
         if (commandHandler.isActive()) return;
 
-        if (event.getButton() == MouseButton.PRIMARY)
+        if (event.getButton() == MouseButton.PRIMARY) {
             commandHandler.start(new CameraPanning(camera));
+            commandHandler.press(event);
+            requestFocus();
+        }
 
-        commandHandler.press(event);
-        requestFocus();
-        event.consume();
+
     }
 
     private void onMouseDragged(MouseEvent event) {
