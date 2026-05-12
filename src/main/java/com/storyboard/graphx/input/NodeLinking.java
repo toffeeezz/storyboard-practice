@@ -69,9 +69,9 @@ public class NodeLinking implements Command{
             dialogueEntry.setNextEntry(null);
         }
 
-        arrowLine = new ArrowLine(20, startPort.getCenterPos(), parentNode.getEditor().getCamera().getMousePixelPos(e));
+        arrowLine = new ArrowLine(20, startPort.getCenterPos(), parentNode.getEditor().getCamera().getMousePixelPos(e), parentNode);
 
-        arrowLine.setMouseTransparent(true);
+        arrowLine.setTransparentMouse(true);
         parentNode.getEditor().drawArrowLines(arrowLine);
         e.consume();
     }
@@ -117,5 +117,7 @@ public class NodeLinking implements Command{
         dialogueEntry.setNextEntry(endPort.getEntry());
         dialogueEntry.setArrowLine(arrowLine);
         dialogueEntry.setConnectedPort(endPort);
+        arrowLine.setTransparentMouse(false);
+        arrowLine.setNodeTo(endPort.getStoryNode());
     }
 }
