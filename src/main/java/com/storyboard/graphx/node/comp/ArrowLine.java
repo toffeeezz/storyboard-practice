@@ -1,5 +1,6 @@
 package com.storyboard.graphx.node.comp;
 
+import com.storyboard.graphx.node.StoryNode;
 import com.storyboard.graphx.ui.editor.Editor;
 import com.storyboard.utils.Vector2;
 import javafx.beans.property.SimpleDoubleProperty;
@@ -10,24 +11,27 @@ import javafx.scene.shape.Shape;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ArrowLine {
+public class ArrowLine extends Polygon {
 
 
     public final SimpleDoubleProperty angle;
     public final Vector2 endPoint;
     public final Vector2 startPoint;
     public final Vector2 dist;
+    private StoryNode nodeTo;
+    private final StoryNode nodeOrigin;
 
     public final List<Shape> shapes = new ArrayList<>();
 
 
-    public ArrowLine(double arrowSize, Vector2 start, Vector2 end) {
+    public ArrowLine(double arrowSize, Vector2 start, Vector2 end, StoryNode nodeOrigin) {
 
 
         angle = new SimpleDoubleProperty();
         endPoint = new Vector2();
         startPoint = new Vector2();
         dist = new Vector2();
+        this.nodeOrigin = nodeOrigin;
 
         dist.x.addListener(_ -> updateAngle());
         dist.y.addListener(_ -> updateAngle());
@@ -46,9 +50,6 @@ public class ArrowLine {
         line.endYProperty().bind(endPoint.y);
         line.endXProperty().bind(endPoint.x);
 
-        //Tip
-        // Left
-        // Right
         Polygon head = new Polygon(
                 0, 0,        //Tip
                 -arrowSize, -arrowSize / 2,    // Left
@@ -62,6 +63,25 @@ public class ArrowLine {
 
         shapes.add(line);
         shapes.add(head);
+
+        line.setFocusTraversable(true);
+        head.setFocusTraversable(true);
+
+        line.setOnMousePressed(e -> {
+            nodeOrigin.getEditor().setSelectedNode(this);
+            System.out.println("Clicked");
+            line.requestFocus();
+            e.consume();
+        });
+        head.setOnMousePressed(e -> {
+            nodeOrigin.getEditor().setSelectedNode(this);
+            line.requestFocus();
+            e.consume();
+        });
+    }
+
+    public void setNodeTo(StoryNode node){
+        nodeTo = node;
     }
 
     private void updateAngle(){
@@ -72,7 +92,7 @@ public class ArrowLine {
 
     }
 
-    public void setMouseTransparent(boolean value){
+    public void setTransparentMouse(boolean value){
         for(Shape shape : shapes)
             shape.setMouseTransparent(value);
     }
@@ -91,5 +111,13 @@ public class ArrowLine {
         }
         dist.x.bind(endPoint.x.subtract(startPoint.x));
         dist.y.bind(endPoint.y.subtract(startPoint.y));
+    }
+
+    public StoryNode getNodeOrigin() {
+        return nodeOrigin;
+    }
+
+    public StoryNode getNodeTo() {
+        return nodeTo;
     }
 }
