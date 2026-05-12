@@ -7,7 +7,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import org.kordamp.ikonli.javafx.FontIcon;
 
@@ -19,8 +18,6 @@ public class ProjectPropertyWindow extends VBox {
     @FXML private Label emptyVarLabel;
 
     @FXML private VBox varPane;
-
-    @FXML private StackPane stackRoot;
 
     public ProjectPropertyWindow(){
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/storyboard/graphx/ui/editor/ProjectPropertyWindow.fxml"));
