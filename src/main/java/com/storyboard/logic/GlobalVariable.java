@@ -1,17 +1,24 @@
 package com.storyboard.logic;
 
+import javafx.beans.property.SimpleStringProperty;
+
 public class GlobalVariable {
+
+    public String getName() {
+        return name.get();
+    }
+    public SimpleStringProperty nameProperty(){return name;}
 
     public enum Type {
         STRING, INT, BOOLEAN, DOUBLE
     }
 
     private Type type;
-    private String name;
+    private final SimpleStringProperty name = new SimpleStringProperty();
     private Object value;
 
     public GlobalVariable(String name){
-        this.name = name;
+        this.name.set(name);
     }
 
     public Object get(){
@@ -23,7 +30,7 @@ public class GlobalVariable {
     }
 
     public void setName(String name){
-        this.name = name;
+        this.name.set(name);
     }
 
     public void setValue(Object value){
