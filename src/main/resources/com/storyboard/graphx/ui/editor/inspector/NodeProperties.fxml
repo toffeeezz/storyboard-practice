@@ -17,11 +17,5 @@
             <Label fx:id="nameLabel" alignment="CENTER_RIGHT" layoutX="63.2" layoutY="20.0" prefHeight="30.0" prefWidth="127.0" styleClass="inspector" stylesheets="@../../../../../../css/style.css" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="63.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="10.0" layoutY="60.0" prefHeight="30.0" stylesheets="@../../../../../../css/style.css">
-         <children>
-            <Label styleClass="inspector" stylesheets="@../../../../../../css/style.css" text="Parent:" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
-            <Label fx:id="parentLabel" alignment="CENTER_RIGHT" layoutX="63.2" layoutY="20.0" prefHeight="30.0" prefWidth="127.0" styleClass="inspector" stylesheets="@../../../../../../css/style.css" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="63.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
-         </children>
-      </AnchorPane>
    </children>
 </fx:root>
