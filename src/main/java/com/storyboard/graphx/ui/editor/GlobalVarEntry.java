@@ -24,21 +24,6 @@ public class GlobalVarEntry extends StackPane {
     @FXML private HBox varField;
     @FXML private FontIcon deleteButton;
 
-    public GlobalVariable getGlobalVariable() {
-        globalVariable.setType(varBox.getValue());
-        globalVariable.setName(varName.getText());
-
-        switch (varBox.getValue()){
-            case GlobalVariable.Type.STRING -> globalVariable.setValue(stringField.getText());
-            case GlobalVariable.Type.BOOLEAN -> globalVariable.setValue(boolBox.getValue());
-            case GlobalVariable.Type.INT -> globalVariable.setValue(intSpinner.getValue());
-            default -> globalVariable.setValue(doubleSpinner.getValue());
-        }
-
-        return globalVariable;
-
-    }
-
     private final GlobalVariable globalVariable;
 
     private final Spinner<Integer> intSpinner;
