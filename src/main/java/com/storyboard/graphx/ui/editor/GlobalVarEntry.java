@@ -1,6 +1,7 @@
 package com.storyboard.graphx.ui.editor;
 
 import com.storyboard.logic.GlobalVariable;
+import com.storyboard.logic.ProjectSettings;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -23,6 +24,21 @@ public class GlobalVarEntry extends StackPane {
     @FXML private HBox varField;
     @FXML private FontIcon deleteButton;
 
+    public GlobalVariable getGlobalVariable() {
+        globalVariable.setType(varBox.getValue());
+        globalVariable.setName(varName.getText());
+
+        switch (varBox.getValue()){
+            case GlobalVariable.Type.STRING -> globalVariable.setValue(stringField.getText());
+            case GlobalVariable.Type.BOOLEAN -> globalVariable.setValue(boolBox.getValue());
+            case GlobalVariable.Type.INT -> globalVariable.setValue(intSpinner.getValue());
+            default -> globalVariable.setValue(doubleSpinner.getValue());
+        }
+
+        return globalVariable;
+
+    }
+
     private final GlobalVariable globalVariable;
 
     private final Spinner<Integer> intSpinner;
@@ -42,7 +58,6 @@ public class GlobalVarEntry extends StackPane {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        globalVariable = new GlobalVariable("default");
 
         double w = varField.getPrefWidth() / 2;
         double h = varField.getPrefHeight();
@@ -50,6 +65,9 @@ public class GlobalVarEntry extends StackPane {
         stringField = new TextField();
         stringField.setPromptText("value...");
         stringField.setPrefSize(w, h);
+
+        varName.setText("var " + (parent.getChildren().size() - 1));
+        globalVariable = new GlobalVariable(varName.getText());
 
         boolBox = new ComboBox<>();
         boolBox.setItems(FXCollections.observableArrayList(Boolean.TRUE, Boolean.FALSE));
@@ -67,12 +85,22 @@ public class GlobalVarEntry extends StackPane {
         deleteButton.setCursor(Cursor.HAND);
         deleteButton.setOnMousePressed(e -> {
             parent.getChildren().remove(this);
+            ProjectSettings.getInstance().removeVar(globalVariable);
             e.consume();
         });
 
-        varName.setText("var " + (parent.getChildren().size() - 1));
+
 
         setUpComboBox();
+
+        varName.textProperty().addListener((_, _, newVal) -> globalVariable.setName(newVal));
+
+        stringField.textProperty().addListener((_, _, newVal) -> globalVariable.setValue(newVal));
+        boolBox.valueProperty().addListener((_, _, newVal) -> globalVariable.setValue(newVal));
+        intSpinner.valueProperty().addListener((_, _, newVal) -> globalVariable.setValue(newVal));
+        doubleSpinner.valueProperty().addListener((_, _, newVal) -> globalVariable.setValue(newVal));
+
+        ProjectSettings.getInstance().addVar(globalVariable);
     }
 
     private void setUpComboBox(){
