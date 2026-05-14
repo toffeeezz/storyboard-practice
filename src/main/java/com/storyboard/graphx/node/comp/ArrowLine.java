@@ -2,6 +2,7 @@ package com.storyboard.graphx.node.comp;
 
 import com.storyboard.graphx.node.StoryNode;
 import com.storyboard.graphx.ui.editor.Editor;
+import com.storyboard.logic.Transition;
 import com.storyboard.utils.Vector2;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.scene.shape.Line;
@@ -22,6 +23,7 @@ public class ArrowLine extends Polygon {
     private final StoryNode nodeOrigin;
 
     public final List<Shape> shapes = new ArrayList<>();
+    public final List<Transition> transitionList = new ArrayList<>();
 
 
     public ArrowLine(double arrowSize, Vector2 start, Vector2 end, StoryNode nodeOrigin) {
@@ -70,11 +72,15 @@ public class ArrowLine extends Polygon {
         line.setOnMousePressed(e -> {
             nodeOrigin.getEditor().setSelectedNode(this);
             System.out.println("Clicked");
+            line.getStyleClass().add("focused");
+            head.getStyleClass().add("focused");
             line.requestFocus();
             e.consume();
         });
         head.setOnMousePressed(e -> {
             nodeOrigin.getEditor().setSelectedNode(this);
+            line.getStyleClass().add("focused");
+            head.getStyleClass().add("focused");
             line.requestFocus();
             e.consume();
         });
