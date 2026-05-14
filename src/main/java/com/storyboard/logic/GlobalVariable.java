@@ -13,6 +13,10 @@ public class GlobalVariable {
         STRING, INT, BOOLEAN, DOUBLE
     }
 
+    public Type getType() {
+        return type;
+    }
+
     private Type type;
     private final SimpleStringProperty name = new SimpleStringProperty();
     private Object value;
@@ -21,7 +25,7 @@ public class GlobalVariable {
         this.name.set(name);
     }
 
-    public Object get(){
+    public Object getValue(){
         return value;
     }
 
