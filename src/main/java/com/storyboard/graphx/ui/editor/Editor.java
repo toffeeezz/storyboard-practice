@@ -87,6 +87,11 @@ public class Editor extends Pane {
                 selectedNode.set(null);
         });
 
+        selectedNode.addListener((_, oldVal, newVal) -> {
+            if(oldVal instanceof ArrowLine oldArrow)
+                oldArrow.shapes.forEach(s -> s.getStyleClass().remove("focused"));
+        });
+
         DialogueNode card  = new DialogueNode(this);
         DialogueNode card2 = new DialogueNode(this);
         DialogueNode card3 = new DialogueNode(this);
