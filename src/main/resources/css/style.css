@@ -44,6 +44,7 @@
     -fx-edge-default: #5c4a99;
     -fx-edge-hover: #9d78d0;
     -fx-edge-selected: #c4a0f5;
+    -fx-edge-focused: #f5d0ff;
 
     /* Purple Variants */
     -fx-vivid-purple: #7b2fa0;
@@ -71,6 +72,11 @@
 .arrow {
     -fx-stroke: -fx-port-active-fill;
     -fx-fill: -fx-port-active-fill;
+}
+
+.arrow.focused {
+    -fx-stroke: -fx-edge-focused;
+    -fx-fill: -fx-edge-focused;
 }
 
 /* ── Ports ── */
