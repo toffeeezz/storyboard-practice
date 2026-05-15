@@ -2,6 +2,7 @@ package com.storyboard.graphx.node.comp;
 
 import com.storyboard.graphx.node.StoryNode;
 import com.storyboard.graphx.ui.editor.Editor;
+import com.storyboard.logic.Condition;
 import com.storyboard.logic.Transition;
 import com.storyboard.utils.Vector2;
 import javafx.beans.property.SimpleDoubleProperty;
@@ -23,7 +24,16 @@ public class ArrowLine extends Polygon {
     private final StoryNode nodeOrigin;
 
     public final List<Shape> shapes = new ArrayList<>();
-    public final List<Transition> transitionList = new ArrayList<>();
+
+    public Transition getTransition() {
+        return transition;
+    }
+
+    public void setTransition(Transition transition) {
+        this.transition = transition;
+    }
+
+    private Transition transition;
 
 
     public ArrowLine(double arrowSize, Vector2 start, Vector2 end, StoryNode nodeOrigin) {
