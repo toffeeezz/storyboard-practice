@@ -304,6 +304,7 @@
 
 .scroll-pane .viewport {
     -fx-background-color: transparent;
+    -fx-padding: 0 20 0 0;
 }
 
 .scroll-pane .scroll-bar {
@@ -412,4 +413,60 @@
     -fx-background-color: -fx-deep-bg;
     -fx-padding: 10 14 10 14;
     -fx-background-radius: 0 0 9 9;
+}
+
+
+/* ── Alert / Warning popup ── */
+.alert {
+    -fx-background-color: -fx-panel;
+}
+
+.alert .dialog-pane {
+    -fx-background-color: -fx-panel;
+    -fx-border-color: -fx-border;
+    -fx-border-width: 1;
+    -fx-border-radius: 9;
+    -fx-background-radius: 9;
+    -fx-effect: dropshadow(gaussian, #0f0d17, 20, 0.5, 0, 6);
+}
+
+.alert .dialog-pane .header-panel {
+    -fx-background-color: -fx-topbar;
+    -fx-background-radius: 9 9 0 0;
+}
+
+.alert .dialog-pane .content {
+    -fx-background-color: -fx-panel;
+    -fx-text-fill: -fx-text-primary;
+    -fx-font-family: 'Outfit';
+    -fx-font-size: 13px;
+}
+
+.alert .dialog-pane .button-bar {
+    -fx-background-color: -fx-deep-bg;
+    -fx-background-radius: 0 0 9 9;
+    -fx-padding: 10 14 10 14;
+}
+
+.alert .dialog-pane .button-bar .button {
+    -fx-background-color: -fx-node-bg;
+    -fx-text-fill: -fx-text-accent;
+    -fx-border-color: -fx-border;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-font-family: 'Outfit';
+    -fx-font-size: 13px;
+    -fx-padding: 4 14 4 14;
+    -fx-min-width: 0;
+    -fx-min-height: 0;
+}
+
+.alert .dialog-pane .button-bar .button:hover {
+    -fx-background-color: -fx-topbar;
+    -fx-border-color: -fx-text-muted;
+}
+
+.alert .dialog-pane .button-bar .button:pressed {
+    -fx-background-color: -fx-section;
+    -fx-border-color: -fx-text-accent;
 }
