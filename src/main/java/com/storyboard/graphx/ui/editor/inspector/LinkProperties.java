@@ -1,29 +1,26 @@
 package com.storyboard.graphx.ui.editor.inspector;
 
 import com.storyboard.graphx.node.comp.ArrowLine;
+import com.storyboard.graphx.ui.editor.window.TransitionWindow;
 import com.storyboard.logic.GlobalVariable;
-import com.storyboard.logic.Transition;
+import com.storyboard.logic.Condition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListCell;
 import javafx.scene.layout.VBox;
 import org.kordamp.ikonli.javafx.FontIcon;
 
 import java.io.IOException;
-import java.util.List;
 
 public class LinkProperties extends VBox {
 
     @FXML private Label fromLabel;
     @FXML private Label toLabel;
 
-    @FXML private FontIcon addButton;
+    @FXML private Button editButton;
 
-    @FXML private VBox entryPane;
-
-    private ComboBox<GlobalVariable> globalVarBox;
     private ArrowLine arrowLine;
 
 
@@ -39,9 +36,10 @@ public class LinkProperties extends VBox {
             throw new RuntimeException(e);
         }
 
-        addButton.setOnMousePressed(e -> {
-            arrowLine.transitionList.add(new Transition());
-            displayTransitions();
+
+        editButton.setOnAction(e -> {
+            new TransitionWindow().show();
+            e.consume();
         });
     }
 
@@ -50,16 +48,6 @@ public class LinkProperties extends VBox {
         System.out.println("Display link");
         fromLabel.setText(line.getNodeOrigin().getId());
         toLabel.setText(line.getNodeTo().getId());
-        displayTransitions();
-    }
-
-    private void displayTransitions(){
-        entryPane.getChildren().clear();
-        if(arrowLine.transitionList.isEmpty()) return;
-
-        for(Transition transition : arrowLine.transitionList){
-            entryPane.getChildren().add(new TransitionEntry(entryPane, transition, arrowLine));
-        }
     }
 
 
