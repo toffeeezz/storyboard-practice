@@ -31,6 +31,8 @@ public class GlobalVarEntry extends StackPane {
     private final ComboBox<Boolean> boolBox;
     private final TextField stringField;
 
+    private boolean reverting = false;
+
     public GlobalVarEntry(VBox parent){
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/storyboard/graphx/ui/editor/GlobalVarEntry.fxml"));
 
@@ -91,7 +93,17 @@ public class GlobalVarEntry extends StackPane {
     private void setUpComboBox(){
         varBox.setItems(FXCollections.observableArrayList(GlobalVariable.Type.values()));
 
-        varBox.valueProperty().addListener((_, _, newVal) -> {
+        varBox.valueProperty().addListener((_, oldType, newVal) -> {
+            if (reverting) return;
+
+            if (ProjectSettings.getInstance().checkVariableUsage(globalVariable)) {
+                reverting = true;
+                varBox.setValue(oldType);
+                reverting = false;
+                return;
+            }
+
+            globalVariable.setType(newVal);
             switch (newVal){
                 case GlobalVariable.Type.STRING -> switchInputField(stringField);
                 case GlobalVariable.Type.BOOLEAN -> switchInputField(boolBox);
