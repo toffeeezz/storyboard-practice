@@ -2,15 +2,11 @@ package com.storyboard.graphx.ui.editor.inspector;
 
 import com.storyboard.graphx.node.comp.ArrowLine;
 import com.storyboard.graphx.ui.editor.window.TransitionWindow;
-import com.storyboard.logic.GlobalVariable;
-import com.storyboard.logic.Condition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
-import org.kordamp.ikonli.javafx.FontIcon;
 
 import java.io.IOException;
 
@@ -38,7 +34,7 @@ public class LinkProperties extends VBox {
 
 
         editButton.setOnAction(e -> {
-            new TransitionWindow().show();
+            new TransitionWindow(arrowLine).show();
             e.consume();
         });
     }
