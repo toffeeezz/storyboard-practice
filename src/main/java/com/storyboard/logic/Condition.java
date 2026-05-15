@@ -19,7 +19,7 @@ public class Condition {
         this.compareValue = compareValue;
     }
 
-    public Operation getCondition() {
+    public Operation getOperation() {
         return operation;
     }
 
@@ -87,10 +87,7 @@ public class Condition {
 
     private boolean isValidType(Object value) {
         return switch (value) {
-            case String s -> true;
-            case Double d -> true;
-            case Integer i -> true;
-            case Boolean b -> true;
+            case String _, Double _, Integer _, Boolean _ -> true;
             default -> false;
         };
     }
