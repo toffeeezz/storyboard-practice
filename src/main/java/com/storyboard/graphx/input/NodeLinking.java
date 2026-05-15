@@ -4,6 +4,7 @@ import com.storyboard.graphx.node.comp.ArrowLine;
 import com.storyboard.graphx.node.StoryNode;
 import com.storyboard.graphx.node.Port;
 import com.storyboard.graphx.node.comp.DialogueEntry;
+import com.storyboard.logic.ProjectSettings;
 import javafx.scene.input.MouseDragEvent;
 import javafx.scene.input.MouseEvent;
 
@@ -96,6 +97,7 @@ public class NodeLinking implements Command{
 
         isLinking = false;
         endPort.getStyleClass().remove("hover");
+        ProjectSettings.getInstance().removeTransition(arrowLine.getTransition());
     }
 
     @Override
@@ -119,5 +121,6 @@ public class NodeLinking implements Command{
         dialogueEntry.setConnectedPort(endPort);
         arrowLine.setTransparentMouse(false);
         arrowLine.setNodeTo(endPort.getStoryNode());
+        ProjectSettings.getInstance().addTransition(arrowLine.getTransition());
     }
 }
