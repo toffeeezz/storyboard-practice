@@ -6,6 +6,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
@@ -22,18 +23,18 @@
             </FontIcon>
          </children>
       </AnchorPane>
-      <ScrollPane fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="446.0" prefWidth="401.0" VBox.vgrow="NEVER">
+      <ScrollPane fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" prefHeight="373.0" prefWidth="400.0" VBox.vgrow="NEVER">
          <content>
-            <VBox alignment="CENTER" maxWidth="1.7976931348623157E308">
-               <children>
-                  <Button mnemonicParsing="false" text="Add Condition" VBox.vgrow="ALWAYS">
-                     <VBox.margin>
-                        <Insets top="10.0" />
-                     </VBox.margin>
-                  </Button>
-               </children>
-            </VBox>
+            <VBox fx:id="entryPane" alignment="CENTER" maxWidth="1.7976931348623157E308" prefWidth="395.0" />
          </content>
+         <VBox.margin>
+            <Insets />
+         </VBox.margin>
       </ScrollPane>
+      <StackPane prefHeight="150.0" prefWidth="200.0">
+         <children>
+            <Button fx:id="addButton" mnemonicParsing="false" text="Add Condition" />
+         </children>
+      </StackPane>
    </children>
 </fx:root>
