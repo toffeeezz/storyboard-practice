@@ -1,11 +1,9 @@
 package com.storyboard.graphx.ui.editor;
 
-import com.storyboard.graphx.node.DialogueNode;
-import com.storyboard.graphx.node.StoryNode;
 import com.storyboard.graphx.ui.editor.inspector.Inspector;
-import com.storyboard.utils.Vector2;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Point2D;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -19,8 +17,6 @@ public class EditorUI extends StackPane {
     @FXML private Pane projectPropertyPane;
     @FXML private Pane editorPane;
 
-    private final Inspector inspector;
-    private final ProjectPropertyWindow projectWindow;
     private final Editor editor;
     private final QuickToolBar quickToolBar;
 
@@ -37,12 +33,11 @@ public class EditorUI extends StackPane {
         }
 
         editor = new Editor();
-        inspector = new Inspector();
-        quickToolBar = new QuickToolBar();
-        projectWindow = new ProjectPropertyWindow();
+        Inspector inspector = new Inspector();
+        quickToolBar = new QuickToolBar(editor);
+        ProjectPropertyWindow projectWindow = new ProjectPropertyWindow();
 
         setInspector(inspector);
-        setQuickToolBar(quickToolBar);
 
         editorPane.getChildren().addAll(editor);
         inspectorWindow.getChildren().addAll(inspector);
@@ -51,14 +46,19 @@ public class EditorUI extends StackPane {
         editorPane.addEventFilter(MouseEvent.MOUSE_PRESSED, e -> {
             if(e.getButton() == MouseButton.SECONDARY){
                 System.out.println("Right click");
-                if(!editorPane.getChildren().contains(quickToolBar)) {
-                    editorPane.getChildren().add(quickToolBar);
-                    System.out.println(e.getSceneX());
-                    double spawnX = e.getSceneX() > 790 ? e.getSceneX() - quickToolBar.getWidth() : e.getSceneX();
-                    quickToolBar.relocate(spawnX, e.getSceneY());
+                if(!editor.getOverlayPane().getChildren().contains(quickToolBar)) {
+                    editor.getOverlayPane().getChildren().add(quickToolBar);
+
+                    double x = e.getX();
+                    double y = e.getY();
+
+                    double spawnX = x > 790 ? x - quickToolBar.getWidth() : x;
+
+                    quickToolBar.setLayoutX(spawnX);
+                    quickToolBar.setLayoutY(y);
                 }
                 else
-                    editorPane.getChildren().remove(quickToolBar);
+                    editor.getOverlayPane().getChildren().remove(quickToolBar);
                 e.consume();
             }else{
                 editorPane.getChildren().remove(quickToolBar);
@@ -67,17 +67,7 @@ public class EditorUI extends StackPane {
 
     }
 
-    private void setQuickToolBar(QuickToolBar quickToolBar){
-        quickToolBar.onDialogueButtonPressed(e -> {
-            Vector2 pos = editor.camera.getMouseWorldPos(e);
-
-            editor.addNode(new DialogueNode(editor), pos);
-        });
-    }
-
     private void setInspector(Inspector inspector){
-        editor.selectedNodeProperty().addListener(_ -> {
-            inspector.showProperties(editor.getSelectedNode());
-        });
+        editor.selectedNodeProperty().addListener(_ -> inspector.showProperties(editor.getSelectedNode()));
     }
 }
