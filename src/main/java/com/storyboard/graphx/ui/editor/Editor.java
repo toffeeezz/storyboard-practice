@@ -39,6 +39,8 @@ public class Editor extends Pane {
     /** The infinite scrollable canvas that holds all story nodes and arrows. */
     private final Pane worldPane = new Pane();
 
+    private final Pane overlayPane = new Pane();
+
     /**
      * The origin point in pixel space — corresponds to world coordinate (0, 0).
      * Nodes are positioned relative to this point using {@link #addNode}.
@@ -92,6 +94,8 @@ public class Editor extends Pane {
                 oldArrow.shapes.forEach(s -> s.getStyleClass().remove("focused"));
         });
 
+        overlayPane.setPickOnBounds(false);
+
         DialogueNode card  = new DialogueNode(this);
         DialogueNode card2 = new DialogueNode(this);
         DialogueNode card3 = new DialogueNode(this);
@@ -105,7 +109,7 @@ public class Editor extends Pane {
         setOnMouseReleased(this::onMouseReleased);
         setOnScroll(this::onScroll);
 
-        getChildren().addAll(worldPane);
+        getChildren().addAll(worldPane, overlayPane);
     }
 
     private void onMousePressed(MouseEvent event) {
@@ -183,6 +187,10 @@ public class Editor extends Pane {
 
     public void removeArrow(ArrowLine arrow) {
         worldPane.getChildren().removeAll(arrow.shapes);
+    }
+
+    public Pane getOverlayPane() {
+        return overlayPane;
     }
 
     // -------------------------------------------------------------------------
